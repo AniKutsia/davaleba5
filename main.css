@@ -1,0 +1,33 @@
+div {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    background-color: hotpink;
+    color: white;
+    border-radius: 25px;
+  }
+  
+  .input-form {
+    width: 250px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    margin: 30px;
+  }
+  
+  .button {
+    width: 190px;
+    padding: 10px;
+    background-color: lightblue;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  
+  .text {
+    margin-top: 20px;
+  }
