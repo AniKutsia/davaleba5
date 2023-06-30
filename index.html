@@ -16,3 +16,256 @@
     <script src="js.js"></script>
     
 </html>
+
+
+1.#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+
+class Student {
+private:
+  int matrix[4][4];
+
+  void initializeMatrix() {
+    srand(static_cast<unsigned>(time(NULL)));
+
+    for (int i = 0; i < 4; ++i) {
+      for (int j = 0; j < 4; ++j) {
+        matrix[i][j] = rand() % 100 + 1;  // Generate random numbers between 1 and 100
+      }
+    }
+  }
+
+public:
+  Student() {
+    initializeMatrix();
+  }
+
+  void sortRows() {
+    for (int i = 0; i < 4; ++i) {
+      std::sort(matrix[i], matrix[i] + 4);
+    }
+  }
+
+  void findMatchingNumbers() {
+    bool matchFound = false;
+
+    for (int i = 0; i < 4; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        if (matrix[i][j] == matrix[i][j + 1]) {
+          std::cout << "Matching numbers found in row " << i + 1 << " at indices " << j << " and " << j + 1 << std::endl;
+          matchFound = true;
+        }
+      }
+    }
+
+    if (!matchFound) {
+      std::cout << "No matching numbers found in any row." << std::endl;
+    }
+  }
+
+  void printHighestNumbers() {
+    for (int i = 0; i < 4; ++i) {
+      int highestNumber = matrix[i][3];
+      std::cout << "Highest number in row " << i + 1 << ": " << highestNumber << std::endl;
+    }
+  }
+
+  double calculateAverage() {
+    int sum = 0;
+    int count = 0;
+
+    for (int i = 0; i < 4; ++i) {
+      for (int j = 0; j < 4; ++j) {
+        sum += matrix[i][j];
+        count++;
+      }
+    }
+
+    return static_cast<double>(sum) / count;
+  }
+
+  void printMatrix() {
+    std::cout << "Matrix:" << std::endl;
+
+    for (int i = 0; i < 4; ++i) {
+      for (int j = 0; j < 4; ++j) {
+        std::cout << matrix[i][j] << "\t";
+      }
+      std::cout << std::endl;
+    }
+  }
+};
+
+int main() {
+  Student student;
+
+  student.printMatrix();
+  std::cout << std::endl;
+
+  student.sortRows();
+  student.printMatrix();
+  std::cout << std::endl;
+
+  student.findMatchingNumbers();
+  std::cout << std::endl;
+
+  student.printHighestNumbers();
+  std::cout << std::endl;
+
+  double average = student.calculateAverage();
+  std::cout << "Arithmetic mean of all numbers: " << average << std::endl;
+
+  return 0;
+}
+
+2) 1. შექმენით ცარიელი 10 წევრიანი წრფივი მასივი და შეავსეთ მნიშნველობები რანდომული რიცხვებით
+გამოიყენეთ ნულოვანი სიდი: srand (time(NULL));. 2. შექმენით მეთოდი რომელიც მიმთითებლის გამოყენებით
+(*) მასივის სორტიტებას მოახდენს კლებადობის მიხედვით. 3. Main_ში შექმენით მარტივი სამ პირობიანი
+სვიჩი(switch), რომლის თითოეული პირობა იქნება 4 ზე ნაშთი (1, 2, 3 ან 0). 4. კოდში თითოეული შედეგის
+დაბეჭვდისას აღწერეთ თითოეული შედეგი. მასივის შევსებისას და სორტირებისას დაბეჭდეთ შედეგი. 5.
+Main()_ში ინიციალიზაცია გაუკეთეთ ორ სტრინგს, შეადარეთ ეს ორი სტრინგი ერთმანეთს strcmp() ფუნქციის
+მეშვეობით და დაბეჭდეთ საჭირო შედეგი შეტყობინებით. 6. გადაწერეთ პირველი სტრინგის პირველი 5
+სიმბოლო მეორე სტრინგის ბოლოს და დაბეჭდეთ საჭირო შედეგი შეტყობინებით. 7. დაბეჭდეთ პირველი
+სტრინგის პირველი სიმბოლოს რიცხვითი მნიშვნელობა და 8. მეორე სტრინგი გადაიყვანეთ UperCase_ში.
+
+
+
+
+KODI::
+
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cstring>
+#include <string.h>
+#include <ctype.h>
+#include <ctime>
+using namespace std;
+//arrays sheqmna / pointeri (1)
+void array(int *aPtr) {
+    const int size = 10;
+    srand(time(NULL));
+    for (int i = 0; i < size; ++i) {
+        *(aPtr + i) = 1+rand()%100;
+        cout<<setw(4)<<*(aPtr+i);
+  }
+}
+
+//arrays sortireba klebadobit (2)
+void arrayDiscending(int *aPtr){
+    const int size = 10;
+    for (int i = 0; i < size - 1; ++i) {
+    for (int j = i + 1; j < size; ++j) {
+      if (*(aPtr+ i) < *(aPtr+ j)) {
+        int temp = *(aPtr+ i);
+        *(aPtr+ i) = *(aPtr+ j);
+        *(aPtr+ j) = temp;
+      }
+    }
+    cout<<setw(4)<<*(aPtr+i);
+  }
+}
+
+//stringis uppercase-shi gadaynana (8)
+void upper(char *);
+
+
+int main() {
+  const int size = 10;
+  int a[size];
+  //arrays dabewdva (1) (4)
+  cout<<"(1)current array: "<<endl;
+  array(a);
+  cout<<endl;
+  //dasortireba klebadobit (2) (4)
+  cout<<"(2)sorted array: "<<endl;
+  arrayDiscending(a);
+  cout<<endl;
+  
+  //switch/ 4-is nashti (3) (4)
+  int b;
+  cout<<endl;
+  cout<<"(3)sheiyvane ricxvi: ";
+  cin>>b;
+  int c = b % 4;
+  switch(c){
+      case 0:
+      cout<<"nashti: 0"<<endl;
+      break;
+      case 1:
+      cout<<"nashti: 1"<<endl;
+      break;
+      case 2:
+      cout<<"nashti: 2"<<endl;
+      break;
+      case 3:
+      cout<<"nashti: 3"<<endl;
+      break;
+      default:
+      cout<<"error"<<endl;
+      break;
+  }
+  
+  // 2 stringis kopireba (5)
+  char s1[20] = "happy birthday!";
+  char s2[20] = "hello world!";
+  cout<<endl;
+  cout<<"(5)pirveli stringi: "<<s1<<endl;
+  cout<<"meore string: "<<s2<<endl;
+  int result = strcmp(s1, s2);
+  
+  if (result == 0){
+      cout<<"orive stringi tolia"<<endl;
+  }else if (result < 0){
+      cout<<"pirveli stringi metia"<<endl;
+  }else{
+      cout<<"meore stringi metia"<<endl;
+  }
+  
+  //gadawere pirveli stringis pirveli 5 simbolo meore stringis boloshi (6)
+  cout<<endl;
+  strncpy(s2 + strlen(s2), s1, 5);
+  cout<<"(6)shecvlili stringi: "<<s2<<endl;
+  
+  //pirveli stringis pirveli simbolos ricxviti mnishvneloba(7)
+  cout<<endl;
+  cout<<"(7)ricxviti mnishvnelobaa = "<<int(s1[0])<<endl;
+  
+  //meore stringi gadaiyvanet uppercase-shi (8)
+  cout<<endl;
+  cout<<"(8)shecvlili teqsti: "<<endl;
+  upper(s2);
+  cout<<s2<<endl;
+
+  return 0;
+}
+
+//stringis uppercase-shi gadaynana (8)
+void upper(char *s2Ptr){
+while(*s2Ptr!='\0'){
+*s2Ptr=toupper(*s2Ptr);
+*s2Ptr++;
+}}
+
+DAIBEWDEBA::
+
+(1)current array: 
+94  90  90  31  61  10  48  28  46  24
+(2)sorted array: 
+  94  90  90  61  48  46  31  28  24
+
+(3)sheiyvane ricxvi: 12
+nashti: 0
+
+(5)pirveli stringi: happy birthday!
+meore string: hello world!
+pirveli stringi metia
+
+(6)shecvlili stringi: hello world!happy
+
+(7)ricxviti mnishvnelobaa = 104
+
+(8)shecvlili teqsti: 
+HELLO WORLD!HAPPY
