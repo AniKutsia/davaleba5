@@ -265,6 +265,105 @@ pirveli stringi metia
 
 (6)shecvlili stringi: hello world!happy
 
+
+
+      #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+#include <cmath>
+
+const int ROWS = 5;
+const int COLS = 5;
+
+class Student {
+private:
+    int lookup;
+    int marks[ROWS][COLS];
+
+    void fillArray() {
+        srand(time(NULL));
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                marks[i][j] = rand() % 101;
+            }
+        }
+        std::cout << "Array filled with random marks." << std::endl;
+    }
+
+    void sortMarks() {
+        for (int j = 0; j < COLS; j++) {
+            std::sort(marks[j], marks[j] + ROWS);
+        }
+        std::cout << "Marks sorted in ascending order for each subject." << std::endl;
+    }
+
+    bool hasCoincidence() {
+        for (int j = 0; j < COLS; j++) {
+            int prevMark = marks[0][j];
+            for (int i = 1; i < ROWS; i++) {
+                if (marks[i][j] == prevMark) {
+                    return true;
+                }
+                prevMark = marks[i][j];
+            }
+        }
+        return false;
+    }
+
+public:
+    Student() {
+        lookup = 0;
+        fillArray();
+        sortMarks();
+        if (hasCoincidence()) {
+            std::cout << "There is a coincidence in the marks for each subject." << std::endl;
+        } else {
+            std::cout << "There is no coincidence in the marks for each subject." << std::endl;
+        }
+    }
+
+    void printMinimumGrades() {
+        for (int j = 0; j < COLS; j++) {
+            int minGrade = marks[0][j];
+            for (int i = 1; i < ROWS; i++) {
+                minGrade = std::min(minGrade, marks[i][j]);
+            }
+            std::cout << "Minimum grade for subject " << j + 1 << ": " << minGrade << std::endl;
+        }
+    }
+
+    void multiplyGrades() {
+        for (int i = 0; i < ROWS; i++) {
+            int product = 1;
+            for (int j = 0; j < COLS; j++) {
+                product *= marks[i][j];
+            }
+            std::cout << "Product of grades for student " << i + 1 << ": " << product << std::endl;
+        }
+    }
+
+    void calculateGeometricMean() {
+        for (int i = 0; i < ROWS; i++) {
+            double product = 1.0;
+            for (int j = 0; j < COLS; j++) {
+                product *= marks[i][j];
+            }
+            double geometricMean = std::pow(product, 1.0 / COLS);
+            std::cout << "Geometric mean for student " << i + 1 << ": " << geometricMean << std::endl;
+        }
+    }
+};
+
+int main() {
+    Student student;
+    std::cout << "Printing minimum grades:" << std::endl;
+    student.printMinimumGrades();
+    std::cout << "Multiplying grades:" << std::endl;
+    student.multiplyGrades();
+    std::cout << "Calculating geometric mean:" << std::endl;
+    student.calculateGeometricMean();
+
 (7)ricxviti mnishvnelobaa = 104
 
 (8)shecvlili teqsti: 
